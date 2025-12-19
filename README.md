@@ -170,3 +170,6 @@ on should be used on the left side and handle to be use for the right hand side.
 Use Cases:
 1. When the application depends on multiple api calls
 2. For form based applications too.
+
+Pitfall:
+1. When there are multiple layers this is not well suited.
