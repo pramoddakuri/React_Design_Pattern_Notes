@@ -167,4 +167,6 @@ In React, when passing props to child, grammar followed for functions to pass is
 />
 on should be used on the left side and handle to be use for the right hand side.
 
-
+Use Cases:
+1. When the application depends on multiple api calls
+2. For form based applications too.
