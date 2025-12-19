@@ -9,7 +9,11 @@
 
 
 <h5>State Vs Ref</h5>
-
-<p>State is the source of truth for the data, and state is reactive means when ever any changes happens to the state, it will trigger the rerender.</p>
-
+<h6>State</h6>
+<ol>
+  <li>State is React's way of managing dynamic data that drives rendering</li>
+  <li>Think state as a source of truth</li>
+  <li>When state changes the component rerenders</li>
+  <li>State is reactive - the UI always reflects the current state.</li>
+</ol>
 
