@@ -37,3 +37,7 @@ export default Modal;
 
 in the above component, props are passed and they are rendered. What if a new content or button needs to be show.
 Simple answer pass the props from parent and render that.
+
+<h5>Compound Components</h5>
+
+<img width="1500" height="728" alt="image" src="https://github.com/user-attachments/assets/01d1e315-95b6-4037-9128-845d0445e0ee" />
