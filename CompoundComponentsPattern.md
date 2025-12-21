@@ -231,4 +231,4 @@ Totally allowed, totally normal.
 React ignores the properties and **calls the component function** to get the UI.
 
 
-
+This model will be helpfull, when there are similar pages.
