@@ -118,3 +118,11 @@ function MouseTracker({ render }) {
 
 export default MouseTracker;
 ```
+
+<h5>Use Cases</h5>
+
+To expose interanl state to consumer, where they can pass jsx part
+
+Pitfall
+
+It creates new inline function as the rerender happens.
