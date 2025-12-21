@@ -45,3 +45,76 @@ Messy Bike Pattern also looks the same.
 <h4>The Render Props Pattern</h4>
 
 **A render prop is a prop, that expects a function, that return a JSX.**
+
+Code implentation with pattern
+
+**Parent**
+```jsx
+import MouseTrackerWithChildren from "./with-pattern/using-children/MouseTrackerWithChildren";
+
+function App() {
+    return (
+        <div className="flex flex-col items-center m-2">
+            {/*<CarTracker />
+      <BikeTracker />
+
+            <MouseTracker
+                render={(pos) => (
+                    <p>
+                        🚗 Car is at ({pos.x}, {pos.y})
+                    </p>
+                )}
+            />
+
+             <MouseTracker
+                render={({x, y}) => (
+                    <p>
+                         🏍️ Bike is at ({x}, {y})
+                    </p>
+                )}
+            />*/}
+
+            <MouseTrackerWithChildren>
+                {({ x, y }) => (
+                    <p>
+                        🚗 Car is at ({x}, {y})
+                    </p>
+                )}
+            </MouseTrackerWithChildren>
+            
+            <MouseTrackerWithChildren>
+                {({ x, y }) => (
+                    <p>
+                        🏍️ Bike is at ({x}, {y})
+                    </p>
+                )}
+            </MouseTrackerWithChildren>
+        </div>
+    );
+}
+
+export default App;
+```
+**Child**
+
+```jsx
+import { useState } from "react";
+function MouseTracker({ render }) {
+    const [pos, setPos] = useState({ x: 0, y: 0 });
+
+    function handleMouseMove(e) {
+        setPos({ x: e.clientX, y: e.clientY });
+    }
+
+    return (
+        <div
+            className="border p-2 w-full h-48 my-2"
+            onMouseMove={handleMouseMove}
+        >
+            {render(pos)}
+        </div>
+    );
+}
+
+export default MouseTracker;
+```
