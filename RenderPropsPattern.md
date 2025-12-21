@@ -14,6 +14,7 @@
 Imagine we need to build up a system to track bikes and cars, do we need to write tracking mechanism for both bike and car seperate or to some extent same. The answer is to some extent, we can implement the logic that is suitable for both bike and car. Some duplicates the logic, this is the code smell and the problem.
 
 <h5>Messy car Tracker Component</h5>
+
 ```jsx
 
 import { useState } from "react";
@@ -37,8 +38,8 @@ const CarTracker = () => {
 };
 
 export default CarTracker;
-
 ```
+
 Messy Bike Pattern also looks the same.
 
 <h4>The Render Props Pattern</h4>
