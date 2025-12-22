@@ -23,3 +23,30 @@ function withLoggine(fn){
 }
 
 ```
+
+What This Function Does
+It is a higher‑order function that:
+
+Takes a function fn as an argument.
+Returns a new function that:
+
+logs the arguments before calling fn
+calls the original function
+logs the result after calling fn
+returns the original result
+
+This is essentially a function wrapper / decorator.
+
+```jsx
+function add(a, b) {
+  return a + b;
+}
+
+const loggedAdd = withLoggine(add);
+
+loggedAdd(2, 3);
+// Console:
+// Calling function with args [2, 3]
+// Result 5
+
+```
