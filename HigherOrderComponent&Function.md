@@ -67,6 +67,115 @@ Lets assume we have all the data related movies was stored in a database.
 
 lets assume the first api call is to fetch the list of available movies, that are present inside the database. and other api to show movie analytics. While fetching the data we show loading state. If we observe we have some common things in the above process. They are fetching data form the api and showing loading state while fetching the data.
 
+<img width="1748" height="902" alt="image" src="https://github.com/user-attachments/assets/0c8e1859-b355-4bdf-bb92-d4246b660df3" />
 
+In the above image, fetch logic was made centralized. And the interactions was made with that to fetch the data. We made the fetch logic into a wrapper component and using the component when required, that is called higher order component.
 
+```jsx
 
+import MovieWithHOC from "./movies/MovieWithHOC";
+
+function App() {
+  return (
+    <div className="flex flex-col items-center">
+      <MovieWithHOC />
+    </div>
+  );
+}
+
+export default App;
+
+---------------------------------------------------------------------------------------------
+
+import { withDataFetching } from "./hoc/withDataFetching";
+import MovieList from "./MovieList";
+import MovieAnalytics from "./MovieAnalytics";
+
+// Wrap both components with the same HOC
+const MovieListWithData = withDataFetching(MovieList);
+const MovieAnalyticsWithData = withDataFetching(MovieAnalytics);
+
+export default function MovieWithHOC() {
+  return (
+    <div className="max-w-lg mx-auto mt-10 space-y-6">
+      <MovieListWithData />
+      <MovieAnalyticsWithData />
+    </div>
+  );
+}
+
+----------------------------------------------------------
+
+function MovieList({ data }) {
+    return (
+        <div className="p-4">
+            <h2 className="text-xl font-bold mb-2">🎞️ Movie List</h2>
+            <ul className="space-y-1">
+                {data.map((movie) => (
+                    <li key={movie.id} className="border-b pb-1">
+                        {movie.title} ({movie.year})
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+
+export default MovieList;
+
+----------------------------------------------------------------------------------------
+
+function MovieAnalytics({ data }) {
+    const totalMovies = data.length;
+    const averageRating =
+        data.reduce((acc, curr) => acc + curr.rating, 0) / totalMovies;
+
+    return (
+        <div className="p-4">
+            <h2 className="text-xl font-bold mb-2">📊 Movie Analytics</h2>
+            <p>Total Movies: {totalMovies}</p>
+            <p>Average Rating: {averageRating.toFixed(1)}</p>
+        </div>
+    );
+}
+
+export default MovieAnalytics
+
+----------------------------------------------------------------------------------------------
+
+import { useEffect, useState } from "react";
+
+export function withDataFetching(WrappedComponent) {
+    return function WithDataFetchingComponent(props) {
+        const [data, setData] = useState([]);
+        const [loading, setLoading] = useState(true);
+        const [error, setError] = useState(null);
+
+        useEffect(() => {
+            async function fetchData() {
+                try {
+                    const res = await fetch(
+                        `${import.meta.env.VITE_API_BASE_URL}/api/movies`
+                    );
+                    if (!res.ok) throw new Error("Failed to fetch data");
+                    const result = await res.json();
+                    setData(result);
+                } catch (err) {
+                    setError(err.message);
+                } finally {
+                    setLoading(false);
+                }
+            }
+
+            fetchData();
+        }, []);
+
+        if (loading) return <p className="text-gray-500">Loading data...</p>;
+        if (error) return <p className="text-red-500">Error: {error}</p>;
+
+        // Pass the fetched data down as a prop
+        return <WrappedComponent data={data} {...props} />;
+    };
+}
+
+```
