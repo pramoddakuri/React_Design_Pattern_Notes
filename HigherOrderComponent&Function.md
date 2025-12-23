@@ -179,3 +179,13 @@ export function withDataFetching(WrappedComponent) {
 }
 
 ```
+
+
+<h5>Use Cases</h5>
+
+We use HOC when multiple components use the same logic, such as error handling, authentication, handling loading, permission check, 
+
+<h5>Pitfall</h5>
+
+When there are multiple nested HOCs, that makes debugging hard.
+Render Props pattern and HOC pattern, we have one modren replacement to them and its a Hook.
