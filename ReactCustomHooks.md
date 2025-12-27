@@ -57,9 +57,8 @@ function withUserData(Wrapped) {
 <p>Trade-offs: Can lead to “wrapper hell” (deeply nested component wrappers), name collisions, and harder debugging</p>
 <p>3) Render Props
 A component that takes a function as a child and calls it to render, passing data in.</p>
-```jsx
 
-
+```javascript
 class UserData extends React.Component {
   state = { users: [] };
   componentDidMount() {
@@ -69,13 +68,10 @@ class UserData extends React.Component {
     return this.props.children(this.state.users);
   }
 }
-
 // Usage
 <UserData>
   {users => <List data={users} />}
 </UserData>
-
 ```
-
 <p>Why Hooks? What problems do they solve?
 Hooks provide a first-class way to reuse stateful logic without changing your component hierarchy. Instead of HOCs/render props, you write custom hooks:</p>
