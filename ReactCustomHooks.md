@@ -75,3 +75,26 @@ class UserData extends React.Component {
 ```
 <p>Why Hooks? What problems do they solve?
 Hooks provide a first-class way to reuse stateful logic without changing your component hierarchy. Instead of HOCs/render props, you write custom hooks:</p>
+
+```javascript
+
+import { useEffect, useState } from "react";
+
+function useUsers() {
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    let isMounted = true;
+    fetch("/api/users")
+      .then(res => res.json())
+      .then(u => isMounted && setUsers(u));
+    return () => { isMounted = false; };
+  }, []);
+  return users;
+}
+
+function UserList() {
+  const users = useUsers();
+  return <List data={users} />;
+}
+```
+
