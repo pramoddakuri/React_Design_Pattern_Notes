@@ -116,3 +116,15 @@ It tells React:
 <li>React, re-render this component when the state changes.</li>
 <li>React, run this side-effect after rendering.</li>
 </ul>
+
+<h5> Why are they called Hooks?</h5>
+<p>Because they “hook into” React’s internal system.
+useState() hooks into:
+➡ the component’s state storage
+useEffect() hooks into:
+➡ React’s commit phase (after DOM updates)
+useContext() hooks into:
+➡ the context subscription system
+useMemo() hooks into:
+➡ memoization during re-renders
+Each Hook is a “hook point” into React.</p>
