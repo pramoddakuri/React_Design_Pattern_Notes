@@ -36,3 +36,46 @@ class UserList extends React.Component {
 
 <p>2) Higher-Order Components (HOCs)
 A HOC is a function that takes a component and returns a new component, injecting props or behavior.</p>
+
+```jsx
+
+
+function withUserData(Wrapped) {
+  return class extends React.Component {
+    state = { users: [] };
+    componentDidMount() {
+      fetch("/api/users").then(res => res.json()).then(users => this.setState({ users }));
+    }
+    render() {
+      return <Wrapped {...this.props} users={this.state.users} />;
+    }
+  };
+}
+
+```
+
+<p>Trade-offs: Can lead to “wrapper hell” (deeply nested component wrappers), name collisions, and harder debugging</p>
+<p>3) Render Props
+A component that takes a function as a child and calls it to render, passing data in.</p>
+```jsx
+
+
+class UserData extends React.Component {
+  state = { users: [] };
+  componentDidMount() {
+    fetch("/api/users").then(res => res.json()).then(users => this.setState({ users }));
+  }
+  render() {
+    return this.props.children(this.state.users);
+  }
+}
+
+// Usage
+<UserData>
+  {users => <List data={users} />}
+</UserData>
+
+```
+
+<p>Why Hooks? What problems do they solve?
+Hooks provide a first-class way to reuse stateful logic without changing your component hierarchy. Instead of HOCs/render props, you write custom hooks:</p>
