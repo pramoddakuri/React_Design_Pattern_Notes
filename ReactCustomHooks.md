@@ -132,4 +132,53 @@ Each Hook is a “hook point” into React.</p>
 
 <h3>Built in Hooks</h3>
 
-[Link to react cheat sheet:] (https://www.tapascript.io/books/react-hooks-cheatsheet)
+[React Hook cheat sheet:] (https://www.tapascript.io/books/react-hooks-cheatsheet)
+
+<h3>Rules of Hooks</h3>
+<ul>
+  <li>Only call hooks at the top level. React needs to know exect order of the hooks during every render.</li>
+  <li>Call hooks only from React functions.</li>
+</ul>
+
+**React stores hooks in linked list data structure**
+
+
+<h3>Custom Hooks</h3>
+
+<ol>
+  <li>Create a Function.</li>
+  <li>Funciton name should start with use.</li>
+  <li>Can use other hooks inside.</li>
+</ol>
+
+```jsx
+
+import { useState } from "react";
+
+function useToggle(initial = false) {
+    const [value, setValue] = useState(initial);
+    const toggle = () => setValue((prev) => !prev);
+    return [value, toggle];
+}
+
+export { useToggle }
+
+```
+```jsx
+
+import { useToggle } from "../hooks/useToggle";
+
+function ThemeSwitcher() {
+  const [isDark, toggleTheme] = useToggle();
+  return (
+    <button onClick={toggleTheme}>
+      {isDark ? '🌙 Dark Mode' : '☀️ Light Mode'}
+    </button>
+  );
+}
+
+export default ThemeSwitcher;
+
+```
+
+
