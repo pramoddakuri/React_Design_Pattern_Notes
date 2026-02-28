@@ -1,6 +1,23 @@
 # react-design-pattern
 My React learning journey with notes and examples on design patterns
 
+Container-Presenter Pattern in React
+The Container-Presenter Pattern (also known as Smart/Dumb Components or Container/Component Pattern) is a design pattern that separates concerns by dividing components into two distinct types:
+
+Pattern Overview
+	Container Components (Smart Components)
+		Handle business logic and state management
+		Make API calls and manage data fetching
+		Pass data down to presentational components via props
+		Handle user interactions and events
+		Connect to external state management (Redux, Context, etc.)
+	Presentational Components (Dumb Components)
+		Focus purely on UI rendering
+		Receive data via props
+		Are stateless (or have minimal UI-only state)
+		Highly reusable and testable
+		No knowledge of business logic or data sources
+
 1. Single Responsibiliy Prinicple:
 
   ```jsx
